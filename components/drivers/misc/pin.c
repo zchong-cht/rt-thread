@@ -60,7 +60,7 @@ static rt_size_t _pin_write(rt_device_t dev, rt_off_t pos, const void *buffer, r
     return size;
 }
 
-static rt_err_t  _pin_control(rt_device_t dev, rt_uint8_t cmd, void *args)
+static rt_err_t  _pin_control(rt_device_t dev, int cmd, void *args)
 {
     struct rt_device_pin_mode *mode;
     struct rt_device_pin *pin = (struct rt_device_pin *)dev;
@@ -117,7 +117,7 @@ rt_err_t rt_pin_dettach_irq(rt_int32_t pin)
     }
     return RT_ENOSYS;
 }
-rt_err_t pin_irq_enable(rt_base_t pin, rt_uint32_t enabled)
+rt_err_t rt_pin_irq_enable(rt_base_t pin, rt_uint32_t enabled)
 {
     RT_ASSERT(_hw_pin.ops != RT_NULL);
     if(_hw_pin.ops->pin_irq_enable)

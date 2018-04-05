@@ -6,7 +6,12 @@
 #define ERRNO                       1
 
 #define LWIP_IPV4                   1
+
+#ifdef RT_USING_LWIP_IPV6
+#define LWIP_IPV6                   1
+#else
 #define LWIP_IPV6                   0
+#endif /* RT_USING_LWIP_IPV6 */
 
 #define NO_SYS                      0
 #define LWIP_SOCKET                 1
@@ -93,16 +98,17 @@
 //#define MEMP_USE_CUSTOM_POOLS       1
 //#define MEM_SIZE                    (1024*64)
 
-#ifdef RT_LWIP_USING_RT_MEM
-#define MEMP_MEM_MALLOC             1
-#else
 #define MEMP_MEM_MALLOC             0
-#endif
 
 /* MEMP_NUM_PBUF: the number of memp struct pbufs. If the application
    sends a lot of data out of ROM (or other static memory), this
    should be set high. */
 #define MEMP_NUM_PBUF               32 //16
+
+/* the number of struct netconns */
+#ifdef RT_MEMP_NUM_NETCONN
+#define MEMP_NUM_NETCONN            RT_MEMP_NUM_NETCONN
+#endif
 
 /* the number of UDP protocol control blocks. One per active RAW "connection". */
 #ifdef RT_LWIP_RAW_PCB_NUM
@@ -287,6 +293,12 @@
 #define DEFAULT_UDP_RECVMBOX_SIZE   1
 
 /* ---------- RAW options ---------- */
+#ifdef RT_LWIP_RAW
+#define LWIP_RAW                    1
+#else
+#define LWIP_RAW                    0
+#endif
+
 #define DEFAULT_RAW_RECVMBOX_SIZE   1
 #define DEFAULT_ACCEPTMBOX_SIZE     10
 
@@ -348,12 +360,31 @@
 
 #endif /* PPP_SUPPORT */
 
-/* no read/write/close for socket */
-#define LWIP_POSIX_SOCKETS_IO_NAMES 0
-#define LWIP_NETIF_API  1
+/**
+ * LWIP_POSIX_SOCKETS_IO_NAMES==1: Enable POSIX-style sockets functions names.
+ * Disable this option if you use a POSIX operating system that uses the same
+ * names (read, write & close). (only used if you use sockets.c)
+ */
+#ifndef LWIP_POSIX_SOCKETS_IO_NAMES
+#define LWIP_POSIX_SOCKETS_IO_NAMES     0
+#endif
 
-/* MEMP_NUM_SYS_TIMEOUT: the number of simulateously active timeouts. */
-#define MEMP_NUM_SYS_TIMEOUT       (LWIP_TCP + IP_REASSEMBLY + LWIP_ARP + (2*LWIP_DHCP) + LWIP_AUTOIP + LWIP_IGMP + LWIP_DNS + PPP_SUPPORT)
+/**
+ * LWIP_TCP_KEEPALIVE==1: Enable TCP_KEEPIDLE, TCP_KEEPINTVL and TCP_KEEPCNT
+ * options processing. Note that TCP_KEEPIDLE and TCP_KEEPINTVL have to be set
+ * in seconds. (does not require sockets.c, and will affect tcp.c)
+ */
+#ifndef LWIP_TCP_KEEPALIVE
+#define LWIP_TCP_KEEPALIVE              1
+#endif
+
+/**
+ * LWIP_NETIF_API==1: Support netif api (in netifapi.c)
+ */
+#ifndef LWIP_NETIF_API
+#define LWIP_NETIF_API                  1
+#endif
+
 #ifdef LWIP_IGMP
 #include <stdlib.h>
 #define LWIP_RAND                  rand
@@ -418,5 +449,23 @@
 #ifndef SO_REUSE
 #define SO_REUSE                        0
 #endif
+
+/*
+   ------------------------------------
+   ------- Applications options -------
+   ------------------------------------
+*/
+
+/**
+ * Max. length of TFTP filename
+ */
+#ifdef RT_LWIP_TFTP_MAX_FILENAME_LEN
+#define TFTP_MAX_FILENAME_LEN           RT_LWIP_TFTP_MAX_FILENAME_LEN
+#elif defined(RT_DFS_ELM_MAX_LFN)
+#define TFTP_MAX_FILENAME_LEN           RT_DFS_ELM_MAX_LFN
+#else
+#define TFTP_MAX_FILENAME_LEN           64
+#endif
+
 
 #endif /* __LWIPOPTS_H__ */

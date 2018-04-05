@@ -10,8 +10,7 @@ if os.getenv('RTT_CC'):
 
 if  CROSS_TOOL == 'gcc':
 	PLATFORM 	= 'gcc'
-	EXEC_PATH 	= 'D:/ArdaArmTools/Sourcery_Lite/bin'
-	#EXEC_PATH 	= 'D:/ArdaArmTools/GNUARM_4.9_2015q1/bin'
+	EXEC_PATH = r'D:\arm-2013.11\bin'
 elif CROSS_TOOL == 'keil':
 	PLATFORM 	= 'armcc'
 	EXEC_PATH 	= 'C:/Keil_v5'
@@ -34,12 +33,11 @@ TARGET_NAME = 'rtthread.bin'
 if PLATFORM == 'gcc':
     # toolchains
     PREFIX = 'arm-none-eabi-'
-    #PREFIX = 'arm-none-linux-gnueabi-'
     CC = PREFIX + 'gcc'
     AS = PREFIX + 'gcc'
     AR = PREFIX + 'ar'
     LINK = PREFIX + 'gcc'
-    TARGET_EXT = 'axf'
+    TARGET_EXT = 'elf'
     SIZE = PREFIX + 'size'
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY = PREFIX + 'objcopy'

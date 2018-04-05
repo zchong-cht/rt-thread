@@ -343,7 +343,7 @@
               <MiscControls />
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine />
-              <IncludePath>Libraries/STM32F2xx_StdPeriph_Driver/inc;Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F2xx;../../components/CMSIS/Include;applications;.;Drivers;../../include;../../libcpu/arm/cortex-m3;../../libcpu/arm/common;../../components/finsh</IncludePath>
+              <IncludePath>Drivers;applications;.;Libraries/STM32F2xx_StdPeriph_Driver/inc;Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F2xx;../../components/CMSIS/Include;../../include;../../libcpu/arm/cortex-m3;../../libcpu/arm/common;../../components/finsh</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,6 +380,82 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
+        <Group>
+          <GroupName>Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>24LCxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/24LCxx.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>FM25Lx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/FM25Lx.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/board.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/i2c.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/rtc.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/serial.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>stm32f2xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/stm32f2xx_it.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Drivers/usart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Applications</GroupName>
+          <Files>
+            <File>
+              <FileName>application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications/application.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications/startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
         <Group>
           <GroupName>STM32_StdPeriph</GroupName>
           <Files>
@@ -615,95 +691,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Applications</GroupName>
-          <Files>
-            <File>
-              <FileName>application.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications/application.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>startup.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications/startup.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Drivers</GroupName>
-          <Files>
-            <File>
-              <FileName>24LCxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/24LCxx.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>FM25Lx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/FM25Lx.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>board.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/board.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/i2c.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/rtc.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>serial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/serial.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>stm32f2xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/stm32f2xx_it.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>Drivers/usart.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
               <FileName>clock.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../src/clock.c</FilePath>
-            </File>
-          </Files>
-          <Files>
-            <File>
-              <FileName>components.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../src/components.c</FilePath>
             </File>
           </Files>
           <Files>
@@ -767,6 +760,13 @@
               <FileName>scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../src/scheduler.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>signal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../src/signal.c</FilePath>
             </File>
           </Files>
           <Files>
